@@ -1,2 +1,2 @@
 # Nfl Wordle
- A wordle for nfl players
+ A wordle for NFL players
