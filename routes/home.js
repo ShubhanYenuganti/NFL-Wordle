@@ -6,15 +6,19 @@ const rootDir = require('../util/path');
 
 const router = express.Router();
 
+const player = [];
+
 // add-product => GET
 router.get('/', (req, res, next) => {
-  res.sendFile(path.join(rootDir, 'views', 'home.html'));
+  res.render('home', {players: player, pageTitle: 'home', path :'/', hasPlayers: this.players.length > 0})
 });
 
 // /admin/add-product => POST
 router.post('/', (req, res, next) => {
-  console.log(req.body);
+  player.push({ name: req.body.player });
+  console.log(player)
   res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.players = player;
