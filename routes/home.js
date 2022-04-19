@@ -13,8 +13,7 @@ router.get('/', (req, res, next) => {
   res.render('home', {
     players: player,
     pageTitle: 'home',
-    path: '/',
-    hasPlayers: this.players.length > 0
+    path: '/'
   })
 });
 
@@ -23,7 +22,6 @@ router.post('/', (req, res, next) => {
   player.push({
     name: req.body.player
   });
-  console.log(player)
   res.redirect('/');
 });
 

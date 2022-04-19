@@ -100,31 +100,3 @@ body {
     font-size:18px;
     padding:10px;
 }
-
-.how-to-play
-{
-    background-color: #fffaf7;
-    text-align: center;
-    color: #002447;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-left: 150px;
-    margin-right: 150px;
-    font-size: 18px;
-    font-family: 'Lato', sans-serif;
-    line-height: 300%;
-}
-
-.green
-{
-    background-color: #3E7C17;
-    color: #002447;
-}
-
-.yellow
-{
-    background-color: #FCD900;
-    color:#002447
-}
