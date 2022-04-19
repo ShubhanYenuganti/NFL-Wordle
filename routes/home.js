@@ -10,12 +10,19 @@ const player = [];
 
 // add-product => GET
 router.get('/', (req, res, next) => {
-  res.render('home', {players: player, pageTitle: 'home', path :'/', hasPlayers: this.players.length > 0})
+  res.render('home', {
+    players: player,
+    pageTitle: 'home',
+    path: '/',
+    hasPlayers: this.players.length > 0
+  })
 });
 
 // /admin/add-product => POST
 router.post('/', (req, res, next) => {
-  player.push({ name: req.body.player });
+  player.push({
+    name: req.body.player
+  });
   console.log(player)
   res.redirect('/');
 });
