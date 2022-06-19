@@ -2,9 +2,9 @@
 <h1 class="h1">NFL Wordle</h1>
 
 <main>
-    <form class="input" action="/" method="POST">
+    <form id="form" class="input" action="/" method="POST">
         <!--Guess # should dynamically update (ignore for now)-->
-        <input type="text" name="player" placeholder="Guess #">
+        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %>>
     </form>
 
     <div class=stats>
@@ -12,22 +12,39 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Team</th>
-                    <th>Conf</th>
                     <th>Div</th>
+                    <th>Team</th>
                     <th>Pos</th>
-                    <th>Seasons Played</th>
                     <th>HT</th>
                     <th>Weight</th>
                     <th>Age</th>
                     <th>#</th>
                 </tr>
             </thead>
-            <% if (players.length > 0) { %>
+            <% if (guess) { %>
+                <tr>
+                    <th> <%= guess.name %> </th>
+                    <th> <%= guess.div %> </th>
+                    <th> <%= guess.team %> </th>
+                    <th> <%= guess.pos %> </th>
+                    <th> <%= guess.height %> </th>
+                    <th> <%= guess.weight %> </th>
+                    <th> <%= guess.age %> </th>
+                    <th> <%= guess.jersey %> </th>
+                </tr>
+            <% }
+            <% if (players.length > 0 && players.length <= 8) { %>
                 <% for (let i = 0; i < players.length; i++) { %>
-                    <tr>
-                        <th><%= players[i].name %></th>
-                    </tr>
+                <tr>
+                    <th><%= players[i].name %></th>
+                    <th><%= players[i].div %></th>
+                    <th><%= players[i].team %></th>
+                    <th><%= players[i].pos %></th>
+                    <th><%= players[i].height %></th>
+                    <th><%= players[i].weight %></th>
+                    <th><%= players[i].age %></th>
+                    <th><%= players[i].jersey %></th>
+                </tr>
                 <% } %>
             <% } %>
         </table>
