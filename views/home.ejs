@@ -4,7 +4,7 @@
 
 <main>
     <form id="form" class="input" action="/" method="POST">
-        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %><% if (guess.found) { %>
+        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %><% if (guess.found || players.length == 8) { %>
             readonly = "readonly"
         <% } %>> 
         
