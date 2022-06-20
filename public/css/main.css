@@ -100,3 +100,24 @@ body {
     font-size:18px;
     padding:10px;
 }
+
+.green
+{
+    background-color: #3E7C17;
+    color: aliceblue;
+    /* padding-top: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 5%; */
+}
+
+.yellow
+{
+    background-color: #FCD900;
+    color: aliceblue;
+    /* padding-top: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 5%; */
+}
+

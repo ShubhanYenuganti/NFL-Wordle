@@ -39,13 +39,13 @@ const pos = [
 
 const random_pos = pos[Math.floor(Math.random() * 14)];
 
-fetch("https://ecb5-73-93-10-13.ngrok.io/all/" + random_pos, requestOptions)
+fetch("https://d5f6-73-93-10-13.ngrok.io/all/" + random_pos, requestOptions)
   .then(response => response.text())
   .then(
     result => updateGuess(JSON.parse(result))
   )
   .catch(
-    error => console.log("API request failed or you didn't enter a valid input")
+    error => console.log("API request failure or you didn't enter a valid input")
   );
 
 const updateGuess = (data) => {
@@ -61,7 +61,7 @@ const updateGuess = (data) => {
   // Player (0,1,2)
   if (random_pos == "WR") {
     const rand_player = Math.floor(Math.random() * 3)
-    answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+    addGuess(data[rand_conf][rand_div][rand_team][rand_player]);
   }
 
   // IF T, G, DE, CB, S:
@@ -70,7 +70,7 @@ const updateGuess = (data) => {
   if (random_pos == "T" || random_pos == "G" || random_pos == "DE" || random_pos == "CB" || random_pos == "S") {
     const rand_player = Math.floor(Math.random() * 2)
 
-    answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+    addGuess(data[rand_conf][rand_div][rand_team][rand_player])
   }
 
   // DT
@@ -81,61 +81,61 @@ const updateGuess = (data) => {
     if (rand_conf == 0) {
       if (rand_div == 0) {
         if (rand_team == 1) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 1) {
         if (rand_team == 0 || rand_team == 3) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 2) {
         if (rand_team == 0 || rand_team == 3) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 3) {
         if (rand_team == 2 || rand_team == 3) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       }
     } else if (rand_conf == 1) {
       if (rand_div == 0) {
         if (rand_team == 1) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 1) {
         if (rand_team == 0 || rand_team == 1) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 2) {
         if (rand_team == 2 || rand_team == 3) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 3) {
         if (rand_team == 0 || rand_team == 3) {
-          answer[0] = data[rand_conf][rand_div][rand_team]
+          addGuess(data[rand_conf][rand_div][rand_team])
         } else {
           const rand_player = Math.floor(Math.random() * 2)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       }
     }
@@ -151,78 +151,103 @@ const updateGuess = (data) => {
       if (rand_div == 0) {
         if (rand_team == 1) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 1) {
         if (rand_team == 0 || rand_team == 3) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 2) {
         if (rand_team == 0 || rand_team == 3) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 3) {
         if (rand_team == 2 || rand_team == 3) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       }
     } else if (rand_conf == 1) {
       if (rand_div == 0) {
         if (rand_team == 1) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 1) {
         if (rand_team == 0 || rand_team == 1) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 2) {
         if (rand_team == 2 || rand_team == 3) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       } else if (rand_div == 3) {
         if (rand_team == 0 || rand_team == 3) {
           const rand_player = Math.floor(Math.random() * 4)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         } else {
           const rand_player = Math.floor(Math.random() * 3)
-          answer[0] = data[rand_conf][rand_div][rand_team][rand_player]
+          addGuess(data[rand_conf][rand_div][rand_team][rand_player])
         }
       }
     }
   }
 
   if (random_pos == "QB" || random_pos == "TE" || random_pos == "RB" || random_pos == "C" || random_pos == "PK" || random_pos == "P") {
-    answer[0] = data[rand_conf][rand_div][rand_team]
+    addGuess(data[rand_conf][rand_div][rand_team])
   }
-  
-  console.log(answer[0]);
+
+}
+
+
+const addGuess = (guess) => {
+  var today = new Date();
+  var date2 = new Date(guess.DOB)
+
+  var diff = (today.getTime() - date2.getTime()) / 1000;
+  diff /= (60 * 60 * 24);
+  var age = Math.abs(Math.round(diff / 365.25));
+
+  answer.push({
+    name: guess.name,
+    conf: guess.conference,
+    team: guess.team,
+    pos: guess.position,
+    div: guess.division,
+    height: guess.HtWt.slice(0, guess.HtWt.indexOf(",")) + " ft",
+    height_in: parseInt(guess.HtWt.slice(0, guess.HtWt.indexOf("'"))) * 12 + (parseInt(guess.HtWt.slice(guess.HtWt.indexOf("'") + 2, guess.HtWt.indexOf("'") + 3))),
+    weight: guess.HtWt.slice(guess.HtWt.indexOf(",") + 2),
+    weight_lbs: parseInt(guess.HtWt.slice(guess.HtWt.indexOf(",") + 2, guess.HtWt.indexOf(",") + 5)),
+    age: age,
+    jersey: parseInt(guess.jersey.slice(1))
+  });
+
+  console.log(answer[0])
 }
 
 // add-product => GET
@@ -237,50 +262,53 @@ router.get('/', (req, res, next) => {
 
 // /admin/add-product => POST
 router.post('/', (req, res, next) => {
-    // Get data from https://73b7-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
+  // Get data from https://73b7-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
 
-    fetch("https://ecb5-73-93-10-13.ngrok.io/" + req.body.player, requestOptions)
-      .then(response => response.text())
-      .then(
-        result => updatePlayer(JSON.parse(result))
-      )
-      .catch(
-        error => console.log("API request failed or you didn't enter a valid input")
-      );
+  fetch("https://d5f6-73-93-10-13.ngrok.io/" + req.body.player, requestOptions)
+    .then(response => response.text())
+    .then(
+      result => updatePlayer(JSON.parse(result))
+    )
+    .catch(
+      error => console.log("API request failed or you didn't enter a valid input")
+    );
 
-    const updatePlayer = (data) => {
+  const updatePlayer = (data) => {
 
-      var today = new Date();
-      var date2 = new Date(data.DOB)
+    var today = new Date();
+    var date2 = new Date(data.DOB)
 
-      var diff = (today.getTime() - date2.getTime()) / 1000;
-      diff /= (60 * 60 * 24);
-      var age = Math.abs(Math.round(diff / 365.25));
+    var diff = (today.getTime() - date2.getTime()) / 1000;
+    diff /= (60 * 60 * 24);
+    var age = Math.abs(Math.round(diff / 365.25));
 
-      var addPlayer = false
+    var addPlayer = false
 
-      if (player_names.includes(req.body.player) && player.length != 0) {
-        console.log("SAME PLAYER IN ARRAY")
-      } else {
-        player_names.push(data.name)
-        addPlayer = true
-      }
-
-      if (addPlayer) {
-        player.push({
-          name: req.body.player,
-          team: data.team,
-          pos: data.position,
-          div: data.division,
-          height: data.HtWt.slice(0, data.HtWt.indexOf(",")) + " ft",
-          weight: data.HtWt.slice(data.HtWt.indexOf(",") + 2),
-          age: age,
-          jersey: data.jersey
-        });
-      }
-      res.redirect('/');
+    if (player_names.includes(req.body.player) && player.length != 0) {
+      console.log("SAME PLAYER IN ARRAY")
+    } else {
+      player_names.push(data.name)
+      addPlayer = true
     }
+
+    if (addPlayer) {
+      player.push({
+        name: req.body.player,
+        conf: data.conference,
+        team: data.team,
+        pos: data.position,
+        div: data.division,
+        height: data.HtWt.slice(0, data.HtWt.indexOf(",")) + " ft",
+        height_in: parseInt(data.HtWt.slice(0, data.HtWt.indexOf("'"))) * 12 + (parseInt(data.HtWt.slice(data.HtWt.indexOf("'") + 2, data.HtWt.indexOf("'") + 3))),
+        weight: data.HtWt.slice(data.HtWt.indexOf(",") + 2),
+        weight_lbs: parseInt(data.HtWt.slice(data.HtWt.indexOf(",") + 2, data.HtWt.indexOf(",") + 5)),
+        age: age,
+        jersey: parseInt(data.jersey.slice(1))
+      });
+    }
+    res.redirect('/');
   }
+}
 
 );
 
