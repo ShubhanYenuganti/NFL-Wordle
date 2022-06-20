@@ -1,10 +1,13 @@
 <%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
 <h1 class="h1">NFL Wordle</h1>
 
 <main>
     <form id="form" class="input" action="/" method="POST">
-        <!--Guess # should dynamically update (ignore for now)-->
-        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %>>
+        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %><% if (guess.found) { %>
+            readonly = "readonly"
+        <% } %>> 
+        
     </form>
 
     <div class=stats>
@@ -25,96 +28,61 @@
             <% if (players.length > 0 && players.length <= 8) { %>
                 <% for (let i = 0; i < players.length; i++) { %>
                     <tr>
-                        <th id = "name"><%= players[i].name %></th>
-                        <th id = "div">
-                            <% if (guess.div == players[i].div) { %>
-                                <mark class = "green"><%= players[i].div %></mark>
-                            <% } else if (guess.conf == players[i].conf) { %>
-                                <mark class = "yellow"><%= players[i].div %></mark>
-                            <% } else { %>
-                                <%= players[i].div %>
-                            <% } %>
-                        </th>
-                        <th id = "team">
-                            <% if (guess.team == players[i].team) { %>
-                                <mark class = "green"><%= players[i].team %></mark>
-                            <% } else if (guess.div == players[i].div) { %>
-                                <mark class = "yellow"><%= players[i].team %></mark>
-                            <% } else { %>
-                                <%= players[i].team %>
-                            <% } %>
-                        </th>
-                        <th id = "pos">
-                            <% if (guess.pos == players[i].pos) { %>
-                                <mark class = "green"><%= players[i].pos %></mark>
-                            <% } else if (guess.side == players[i].side) { %>
-                                <mark class = "yellow"><%= players[i].pos %></mark>
-                            <% } else { %>
-                                <%= players[i].pos %>
-                            <% } %>
-                        </th>
-                        <th id = "ht">
-                            <% if (guess.height_in == players[i].height_in) { %>
-                                <mark class = "green"><%= players[i].height %></mark>
-                            <% } else if (guess.height_in <= players[i].height_in + 2 && guess.height_in >= players[i].height_in - 2) { %>
-                                <mark class = "yellow"><%= players[i].height %></mark>
-                            <% } else { %>
-                                <%= players[i].height %>
-                            <% } %>
-                        </th>
-                        <th id = "wt">
-                            <% if (guess.weight_lbs == players[i].weight_lbs) { %>
-                                <mark class = "green"><%= players[i].weight %></mark>
-                            <% } else if (guess.weight_lbs <= players[i].weight_lbs + 20 && guess.weight_lbs >= players[i].weight_lbs - 20) { %>
-                                <mark class = "yellow"><%= players[i].weight %></mark>
-                            <% } else { %>
-                                <%= players[i].weight %>
-                            <% } %>
-                        </th>
-                        <th id = "age">
-                            <% if (guess.age == players[i].age) { %>
-                                <mark class = "green"><%= players[i].age %></mark>
-                            <% } else if (guess.age <= players[i].age + 3 && guess.age >= players[i].age - 3) { %>
-                                <mark class = "yellow"><%= players[i].age %></mark>
-                            <% } else { %>
-                                <%= players[i].age %>
-                            <% } %>
-                        </th>
-                        <th id = "jersey">
-                            <% if (guess.jersey == players[i].jersey) { %>
-                                <mark class = "green"><%= players[i].jersey %></mark>
-                            <% } else if (guess.jersey <= players[i].jersey + 3 && guess.jersey >= players[i].jersey - 3) { %>
-                                <mark class = "yellow"><%= players[i].jersey %></mark>
-                            <% } else { %>
-                                <%= players[i].jersey %>
-                            <% } %>
-                        </th>
+                        <% if (guess.name == players[i].name) { %>
+                            <td class = "green"><%=players[i].name%></td>
+                        <% } else { %>
+                            <td> <%=players[i].name%></td>
+                        <% } %>
+                        <% if (guess.div == players[i].div) { %>
+                            <td class = "green"><%= players[i].div %></td>
+                        <% } else if (guess.conf == players[i].conf) { %>
+                            <td class = "yellow"><%= players[i].div %></td>
+                        <% } else { %>
+                            <td><%= players[i].div %></td>
+                        <% } %>
+                        <% if (guess.team == players[i].team) { %>
+                            <td class = "green"><%= players[i].team %></td>
+                        <% } else if (guess.div == players[i].div) { %>
+                            <td class = "yellow"><%= players[i].team %></td>
+                        <% } else { %>
+                            <td><%= players[i].team %></td>
+                        <% } %>
+                        <% if (guess.pos == players[i].pos) { %>
+                            <td class = "green"><%= players[i].pos %></td>
+                        <% } else if (guess.side == players[i].side) { %>
+                            <td class = "yellow"><%= players[i].pos %></td>
+                        <% } else { %>
+                            <td><%= players[i].pos %></td>
+                        <% } %>
+                        <% if (guess.height_in == players[i].height_in) { %>
+                            <td class = "green"><%= players[i].height %></td>
+                        <% } else if (guess.height_in <= players[i].height_in + 2 && guess.height_in >= players[i].height_in - 2) { %>
+                            <td class = "yellow"><%= players[i].height %></td>
+                        <% } else { %>
+                            <td><%= players[i].height %></td>
+                        <% } %>
+                        <% if (guess.weight_lbs == players[i].weight_lbs) { %>
+                            <td class = "green"><%= players[i].weight %></td>
+                        <% } else if (guess.weight_lbs <= players[i].weight_lbs + 20 && guess.weight_lbs >= players[i].weight_lbs - 20) { %>
+                            <td class = "yellow"><%= players[i].weight %></td>
+                        <% } else { %>
+                            <td><%= players[i].weight %></td>
+                        <% } %>                           
+                        <% if (guess.age == players[i].age) { %>
+                            <td class = "green"><%= players[i].age %></td>
+                        <% } else if (guess.age <= players[i].age + 3 && guess.age >= players[i].age - 3) { %>
+                            <td class = "yellow"><%= players[i].age %></td>
+                        <% } else { %>
+                            <td><%= players[i].age %></td>
+                        <% } %>
+                        <% if (guess.jersey == players[i].jersey) { %>
+                            <td class = "green"><%= players[i].jersey %></td>
+                        <% } else if (guess.jersey <= players[i].jersey + 3 && guess.jersey >= players[i].jersey - 3) { %>
+                            <td class = "yellow"><%= players[i].jersey %></td>
+                        <% } else { %>
+                            <td><%= players[i].jersey %></td>
+                        <% } %>
                     </tr>
-                    <!-- <% if (guess.pos == players[i].pos) { %>
-                        <script>
-                            document.getElementById("pos").style.background = "green"
-                        </script>
-                    <% } %>
-                    <% if (guess.height == players[i].height) { %>
-                        <script>
-                            document.getElementById("ht").style.background = "green"
-                        </script>
-                    <% } %>
-                    <% if (guess.weight == players[i].weight) { %>
-                        <script>
-                            document.getElementById("wt").style.background = "green"
-                        </script>
-                    <% } %>
-                    <% if (guess.age == players[i].age) { %>
-                        <script>
-                            document.getElementById("age").style.background = "green"
-                        </script>
-                    <% } %>
-                    <% if (guess.jersey == players[i].jersey) { %>
-                        <script>
-                            document.getElementById("jersey").style.background = "jersey"
-                        </script>
-                    <% } %> -->
                 <% } %>
             <% } %>
         </table>

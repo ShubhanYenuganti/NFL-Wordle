@@ -50,22 +50,18 @@ fetch("https://d5f6-73-93-10-13.ngrok.io/all/" + random_pos, requestOptions)
 
 const updateGuess = (data) => {
 
-  // Conference (0 or 1)
+
   const rand_conf = Math.floor(Math.random() * 2)
-  // Division (0,1,2,3)
   const rand_div = Math.floor(Math.random() * 4)
-  // Team (0,1,2,3)
   const rand_team = Math.floor(Math.random() * 4)
 
-  // IF WR:
-  // Player (0,1,2)
+  // WR:
   if (random_pos == "WR") {
     const rand_player = Math.floor(Math.random() * 3)
     addGuess(data[rand_conf][rand_div][rand_team][rand_player]);
   }
 
-  // IF T, G, DE, CB, S:
-  // Player (0,1)
+  // T, G, DE, CB, S:
 
   if (random_pos == "T" || random_pos == "G" || random_pos == "DE" || random_pos == "CB" || random_pos == "S") {
     const rand_player = Math.floor(Math.random() * 2)
@@ -74,8 +70,6 @@ const updateGuess = (data) => {
   }
 
   // DT
-  // Teams w/NT -- Player (0)
-  // Teams w/out NT -- Player (0,1)
 
   if (random_pos == "DT") {
     if (rand_conf == 0) {
@@ -141,10 +135,7 @@ const updateGuess = (data) => {
     }
   }
 
-
   // LB
-  // Teams w/NT -- Player (0,1,2,3)
-  // Teams w/out NT -- Player (0,1,2)
 
   if (random_pos == "LB") {
     if (rand_conf == 0) {
@@ -244,25 +235,31 @@ const addGuess = (guess) => {
     weight: guess.HtWt.slice(guess.HtWt.indexOf(",") + 2),
     weight_lbs: parseInt(guess.HtWt.slice(guess.HtWt.indexOf(",") + 2, guess.HtWt.indexOf(",") + 5)),
     age: age,
-    jersey: parseInt(guess.jersey.slice(1))
+    jersey: parseInt(guess.jersey.slice(1)),
+    found: false
   });
 
   console.log(answer[0])
 }
 
-// add-product => GET
+
 router.get('/', (req, res, next) => {
+
+  if (answer[0].found) {
+    console.log("PLAYER IS FOUND")
+  }
+
   res.render('home', {
     players: player,
     pageTitle: 'home',
     path: '/',
-    guess: answer[0]
+    guess: answer[0],
   })
 });
 
-// /admin/add-product => POST
+
 router.post('/', (req, res, next) => {
-  // Get data from https://73b7-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
+  // Get data from https://d5f6-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
 
   fetch("https://d5f6-73-93-10-13.ngrok.io/" + req.body.player, requestOptions)
     .then(response => response.text())
@@ -291,6 +288,10 @@ router.post('/', (req, res, next) => {
       addPlayer = true
     }
 
+    var height_in = parseInt(data.HtWt.slice(0, data.HtWt.indexOf("'"))) * 12 + (parseInt(data.HtWt.slice(data.HtWt.indexOf("'") + 2, data.HtWt.indexOf("'") + 3)));
+    var weight_lbs = parseInt(data.HtWt.slice(data.HtWt.indexOf(",") + 2, data.HtWt.indexOf(",") + 5));
+    var jersey = parseInt(data.jersey.slice(1))
+
     if (addPlayer) {
       player.push({
         name: req.body.player,
@@ -299,13 +300,18 @@ router.post('/', (req, res, next) => {
         pos: data.position,
         div: data.division,
         height: data.HtWt.slice(0, data.HtWt.indexOf(",")) + " ft",
-        height_in: parseInt(data.HtWt.slice(0, data.HtWt.indexOf("'"))) * 12 + (parseInt(data.HtWt.slice(data.HtWt.indexOf("'") + 2, data.HtWt.indexOf("'") + 3))),
+        height_in: height_in,
         weight: data.HtWt.slice(data.HtWt.indexOf(",") + 2),
-        weight_lbs: parseInt(data.HtWt.slice(data.HtWt.indexOf(",") + 2, data.HtWt.indexOf(",") + 5)),
+        weight_lbs: weight_lbs,
         age: age,
-        jersey: parseInt(data.jersey.slice(1))
+        jersey: jersey
       });
     }
+
+    if (data.name == answer[0].name && data.conference == answer[0].conf && data.team == answer[0].team && data.position == answer[0].pos && data.division == answer[0].div && height_in == answer[0].height_in && weight_lbs == answer[0].weight_lbs && age == answer[0].age && jersey == answer[0].jersey) {
+      answer[0].found = true
+    }
+
     res.redirect('/');
   }
 }
