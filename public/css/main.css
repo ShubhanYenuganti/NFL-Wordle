@@ -121,3 +121,59 @@ body {
     padding-bottom: 5%;
 }
 
+td {
+    border-bottom: 1px solid #D50A0A;
+}
+
+.popup {
+    width: 400px;
+    background: aliceblue;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #013369;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    visibility: visible;
+}
+
+.close-popup {
+    visibility: hidden;
+}
+
+.popup img {
+    width: 400px;
+    margin-top: 30px;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.popup h3 {
+    font-size: 38px;
+    font-weight: 500;
+    margin: 10px 0 10px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.popup p {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 20px;
+    margin: 15px 0 10px;
+}
+
+.popup button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 0;
+    background: #013369;
+    color: aliceblue;
+    border:0;
+    outline: none;
+    font-size: 20px;
+    font-family: 'Fredoka', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

@@ -4,9 +4,11 @@
 
 <main>
     <form id="form" class="input" action="/" method="POST">
-        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %><% if (guess.found || players.length == 8) { %>
+        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %>
+        <% if (guess.found || players.length == 8) { %>
             readonly = "readonly"
-        <% } %>> 
+        <% } %>
+        > 
         
     </form>
 
@@ -14,6 +16,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Guess</th>
                     <th>Name</th>
                     <th>Div</th>
                     <th>Team</th>
@@ -28,6 +31,7 @@
             <% if (players.length > 0 && players.length <= 8) { %>
                 <% for (let i = 0; i < players.length; i++) { %>
                     <tr>
+                        <td><%= i + 1 %></td>
                         <% if (guess.name == players[i].name) { %>
                             <td class = "green"><%=players[i].name%></td>
                         <% } else { %>
@@ -88,5 +92,35 @@
         </table>
     </div>
 
+    <% if (guess.found || players.length == 8) { %>
+        <div class = "popup" id = "popup">                
+            <% if (guess.image) { %>
+                <img src="<%=guess.image%>" alt="">
+             <% } %>
+            <% if (guess.found) { %>
+                <p class = "p">Great Job!</p>
+            <% } else { %>
+                <p class = "p">Nice Try!</p>
+            <% } %>
+            <h3 class = "h3"><%= guess.name %></h3>
+            <% if (guess.found) { %>
+                <% if (players.length == 1) { %>
+                    <p>You solved it in 1 guess</p>
+                <% } else { %>
+                    <p>You solved it in <%= players.length %> guesses</p>
+                <%  }%> 
+            <% } %>
+            <button type = "button" onclick = "closePopup()">Close</button>
+        </div>
+    <% } %>
+    
+
+   <script>
+    let popup = document.getElementById("popup")
+    function closePopup() {
+        popup.classList.add("close-popup")
+    }
+   </script> 
 </main>
+
 <%- include('includes/end.ejs') %>

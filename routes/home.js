@@ -224,6 +224,12 @@ const addGuess = (guess) => {
   diff /= (60 * 60 * 24);
   var age = Math.abs(Math.round(diff / 365.25));
 
+  var image = null;
+
+  if (guess.jpg) {
+    image = guess.jpg
+  }
+
   answer.push({
     name: guess.name,
     conf: guess.conference,
@@ -236,7 +242,8 @@ const addGuess = (guess) => {
     weight_lbs: parseInt(guess.HtWt.slice(guess.HtWt.indexOf(",") + 2, guess.HtWt.indexOf(",") + 5)),
     age: age,
     jersey: parseInt(guess.jersey.slice(1)),
-    found: false
+    found: false,
+    image: image
   });
 
   console.log(answer[0])
@@ -292,6 +299,12 @@ router.post('/', (req, res, next) => {
     var weight_lbs = parseInt(data.HtWt.slice(data.HtWt.indexOf(",") + 2, data.HtWt.indexOf(",") + 5));
     var jersey = parseInt(data.jersey.slice(1))
 
+    var image = null;
+
+    if (data.jpg) {
+      image = data.jpg
+    }
+
     if (addPlayer) {
       player.push({
         name: req.body.player,
@@ -304,7 +317,8 @@ router.post('/', (req, res, next) => {
         weight: data.HtWt.slice(data.HtWt.indexOf(",") + 2),
         weight_lbs: weight_lbs,
         age: age,
-        jersey: jersey
+        jersey: jersey,
+        image: image
       });
     }
 
