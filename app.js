@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const errorController = require('./controllers/error')
+const mongoConnect = require('./util/database')
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -20,12 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", homeData.routes);
 app.use(howtoRoutes);
 app.use(statsRoutes);
+app.use(errorController.get404)
 
-app.use((req, res, next) => {
-    res.status(404).render('404', {
-        pageTitle: 'Page Not Found',
-        path: 'random'
-    })
-});
+mongoConnect((client) => {
+    console.log(client);
+    app.listen(4000)
+})
 
-app.listen(4000);

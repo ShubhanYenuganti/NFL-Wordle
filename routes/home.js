@@ -39,7 +39,7 @@ const pos = [
 
 const random_pos = pos[Math.floor(Math.random() * 14)];
 
-fetch("https://dc15-2601-646-8500-f220-dcee-3fb4-58d9-3f61.ngrok.io/all/" + random_pos, requestOptions)
+fetch("https://1678-2601-646-8500-f220-91a6-9222-51e1-ca52.ngrok.io/all/" + random_pos, requestOptions)
   .then(response => response.text())
   .then(
     result => updateGuess(JSON.parse(result))
@@ -266,9 +266,9 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  // Get data from https://d5f6-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
+  // Get data from https://1678-2601-646-8500-f220-91a6-9222-51e1-ca52.ngrok.io (note need to change url when api stops running & reruns)
 
-  fetch("https://dc15-2601-646-8500-f220-dcee-3fb4-58d9-3f61.ngrok.io/" + req.body.player, requestOptions)
+  fetch("https://1678-2601-646-8500-f220-91a6-9222-51e1-ca52.ngrok.io/" + req.body.player, requestOptions)
     .then(response => response.text())
     .then(
       result => updatePlayer(JSON.parse(result))
