@@ -1,4 +1,11 @@
 <%- include('includes/head.ejs') %>
+<div class="topnav">
+    <a class = "<%= path === '/' ? 'active' : '' %>" href = "/">Home</a>
+    <a class = "<%= path === '/howtoplay' ? 'active' : '' %>" href = "/howtoplay">How To Play</a>
+    <a class = "btn" onclick = "statsOpenPopup()">Your Stats</a>
+</div>
+
+<body>
 <link rel="stylesheet" href="/css/main.css">
 <h1 class="h1">NFL Wordle</h1>
 
@@ -114,6 +121,11 @@
         </div>
     <% } %>
     
+    <div class = "stats_popup" id = "stats_popup">
+        <h3 class = "h3">Games Won: <%= games_won %></h2>
+        <h3 class = "h3">Games Played: <%= games_played %></h2>
+        <button type = "button" onClick =  "statsClosePopup()">Close</button>
+    </div>
 
    <script>
     let popup = document.getElementById("popup")
@@ -121,6 +133,16 @@
         popup.classList.add("close-popup")
     }
    </script> 
+
+   <script>
+    let stats_popup = document.getElementById("stats_popup")
+    function statsOpenPopup() {
+        stats_popup.classList.add("stats_open-popup")
+    }
+    function statsClosePopup() {
+        stats_popup.classList.add("stats_close-popup")
+    }
+   </script>
 </main>
 
 <%- include('includes/end.ejs') %>

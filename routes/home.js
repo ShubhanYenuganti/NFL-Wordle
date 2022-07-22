@@ -36,7 +36,7 @@ const pos = [
 
 const random_pos = pos[Math.floor(Math.random() * 14)];
 
-fetch(" https://53e5-73-93-10-13.ngrok.io/all/" + random_pos, requestOptions)
+fetch("https://5f7c-2601-646-8500-f220-3d58-57fe-87c0-b92f.ngrok.io/all/" + random_pos, requestOptions)
     .then(response => response.text())
     .then(
         result => updateGuess(JSON.parse(result))
@@ -247,15 +247,20 @@ const addGuess = (guess) => {
 
 const user = new User(
     [],
-    false
+    false,
+    "",
+    0,
+    0
 )
 
 router.get('/', (req, res, next) => {
+    const ip = req.socket.remoteAddress
+    user.ip = ip;
 
     const player = new Player(
         answer[0],
         new Date().getDate()
-    )   
+    ) 
     
     const db = getDb();
     
@@ -267,7 +272,7 @@ router.get('/', (req, res, next) => {
             }
         })
     
-    db.collection('users').count({"id": user.id})
+    db.collection('users').count({"ip": ip})
         .then(result => {
             if (result === 0)
             {
@@ -279,7 +284,12 @@ router.get('/', (req, res, next) => {
         console.log("PLAYER IS FOUND")
     }
 
+    user.updateGamesPlayed();
+    user.updateGamesWon();
+
     res.render('home', {
+        games_played: user.games_played,
+        games_won: user.games_won,
         user: user,
         guesses: user.guess,
         pageTitle: 'home',
@@ -290,9 +300,10 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-    // Get data from  https://53e5-73-93-10-13.ngrok.io (note need to change url when api stops running & reruns)
-
-    fetch(" https://53e5-73-93-10-13.ngrok.io/" + req.body.player, requestOptions)
+    const ip = req.socket.remoteAddress
+    user.ip = ip;
+    // Get data from https://5f7c-2601-646-8500-f220-3d58-57fe-87c0-b92f.ngrok.io (note need to change url when api stops running & reruns)
+    fetch("https://5f7c-2601-646-8500-f220-3d58-57fe-87c0-b92f.ngrok.io/" + req.body.player, requestOptions)
         .then(response => response.text())
         .then(
             result => updatePlayer(JSON.parse(result))
@@ -334,15 +345,23 @@ router.post('/', (req, res, next) => {
             jersey: jersey,
             image: image
         };
-        
-        if (user.guess.includes(guess))
+
+        let notinArray = true;
+
+        for (const element of user.guess) {
+            if (element.name === guess.name){
+                notinArray = false;
+            }
+        }
+        if (notinArray)
         {
-            console.log("PLAYER ALREADY IN ARRAY")
-        } else {
             user.updateUserGuess(guess);
+        } else {
+            console.log("ALREADY IN ARRAY")
         }
     
         if (data.name == answer[0].name && data.conference == answer[0].conf && data.team == answer[0].team && data.position == answer[0].pos && data.division == answer[0].div && height_in == answer[0].height_in && weight_lbs == answer[0].weight_lbs && age == answer[0].age && jersey == answer[0].jersey) {
+            console.log("REACHED")
             user.updateUserStatus(true);
         }
 

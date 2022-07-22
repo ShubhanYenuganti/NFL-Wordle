@@ -12,7 +12,6 @@ app.set('views', 'views');
 
 const homeData = require('./routes/home');
 const howtoRoutes = require('./routes/howto')
-const statsRoutes = require('./routes/stats');
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -21,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", homeData.routes);
 app.use(howtoRoutes);
-app.use(statsRoutes);
 app.use(errorController.get404)
 
 mongoConnect(() => {

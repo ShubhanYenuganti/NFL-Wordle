@@ -177,3 +177,47 @@ td {
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+
+.stats_popup {
+    width: 300px;
+    background: aliceblue;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 15px 30px 15px ;
+    color: #013369;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    visibility: hidden;
+}
+
+.stats_popup h3 {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 10px 0 10px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.stats_open-popup {
+    visibility: visible;
+}
+
+.stats_close-popup {
+    visibility: hidden;
+}
+
+.stats_popup button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 0;
+    background: #013369;
+    color: aliceblue;
+    border:0;
+    outline: none;
+    font-size: 20px;
+    font-family: 'Fredoka', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

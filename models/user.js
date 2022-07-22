@@ -4,10 +4,13 @@ const getDb = require('../util/database').getDb;
 const ObjectId = mongodb.ObjectId;
 
 class User {
-    constructor(guess, status, id) {
+    constructor(guess, status, ip, games_won, games_played, id) {
         this.guess = guess; // {guess: [day1's guesses], [day 2's guesses] ... }
         this.status = status;
-        this._id = id;
+        this.ip = ip;
+        this.games_won = games_won;
+        this.games_played = games_played
+        this._id = id
     }
 
     addUser() {
@@ -34,18 +37,25 @@ class User {
 
     updateUserStatus(bool) {
         const db = getDb();
-        this.status = true;
+        this.status = bool;
         return db.collection('users').updateOne({ _id: new ObjectId(this._id) }, { $set: { status: bool } })
     }
 
-    static getUser(ip) {
+    async updateGamesPlayed() {
         const db = getDb();
-        return db.collection('users').find({ip: ip})
-            .next()
-            .then(user => {
-                return user;
-            })
+        var myCount = await db.collection('users').countDocuments({ip: this.ip})
+
+        this.games_played = myCount
     }
+
+    async updateGamesWon() {
+        const db = getDb();
+
+        var myCount = await db.collection('users').find({"status": true}).count({"ip": this.ip})
+
+        this.games_won = myCount
+    }
+
 }
 
 module.exports = User;
