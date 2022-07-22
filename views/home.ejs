@@ -4,8 +4,8 @@
 
 <main>
     <form id="form" class="input" action="/" method="POST">
-        <input type="text" id="input" name="player" placeholder = <%= players.length + 1 %>
-        <% if (guess.found || players.length == 8) { %>
+        <input type="text" id="input" name="player" placeholder = <%= guesses.length + 1 %>
+        <% if (user.status || guesses.length == 8) { %>
             readonly = "readonly"
         <% } %>
         > 
@@ -28,63 +28,63 @@
                 </tr>
             </thead>
 
-            <% if (players.length > 0 && players.length <= 8) { %>
-                <% for (let i = 0; i < players.length; i++) { %>
+            <% if (guesses.length > 0 && guesses.length <= 8) { %>
+                <% for (let i = 0; i < guesses.length; i++) { %>
                     <tr>
                         <td><%= i + 1 %></td>
-                        <% if (guess.name == players[i].name) { %>
-                            <td class = "green"><%=players[i].name%></td>
+                        <% if (player.name == guesses[i].name) { %>
+                            <td class = "green"><%=guesses[i].name%></td>
                         <% } else { %>
-                            <td> <%=players[i].name%></td>
+                            <td> <%=guesses[i].name%></td>
                         <% } %>
-                        <% if (guess.div == players[i].div) { %>
-                            <td class = "green"><%= players[i].div %></td>
-                        <% } else if (guess.conf == players[i].conf) { %>
-                            <td class = "yellow"><%= players[i].div %></td>
+                        <% if (player.div == guesses[i].div) { %>
+                            <td class = "green"><%= guesses[i].div %></td>
+                        <% } else if (player.conf == guesses[i].conf) { %>
+                            <td class = "yellow"><%= guesses[i].div %></td>
                         <% } else { %>
-                            <td><%= players[i].div %></td>
+                            <td><%= guesses[i].div %></td>
                         <% } %>
-                        <% if (guess.team == players[i].team) { %>
-                            <td class = "green"><%= players[i].team %></td>
-                        <% } else if (guess.div == players[i].div) { %>
-                            <td class = "yellow"><%= players[i].team %></td>
+                        <% if (player.team == guesses[i].team) { %>
+                            <td class = "green"><%= guesses[i].team %></td>
+                        <% } else if (player.div == guesses[i].div) { %>
+                            <td class = "yellow"><%= guesses[i].team %></td>
                         <% } else { %>
-                            <td><%= players[i].team %></td>
+                            <td><%= guesses[i].team %></td>
                         <% } %>
-                        <% if (guess.pos == players[i].pos) { %>
-                            <td class = "green"><%= players[i].pos %></td>
-                        <% } else if (guess.side == players[i].side) { %>
-                            <td class = "yellow"><%= players[i].pos %></td>
+                        <% if (player.pos == guesses[i].pos) { %>
+                            <td class = "green"><%= guesses[i].pos %></td>
+                        <% } else if (player.side == guesses[i].side) { %>
+                            <td class = "yellow"><%= guesses[i].pos %></td>
                         <% } else { %>
-                            <td><%= players[i].pos %></td>
+                            <td><%= guesses[i].pos %></td>
                         <% } %>
-                        <% if (guess.height_in == players[i].height_in) { %>
-                            <td class = "green"><%= players[i].height %></td>
-                        <% } else if (guess.height_in <= players[i].height_in + 2 && guess.height_in >= players[i].height_in - 2) { %>
-                            <td class = "yellow"><%= players[i].height %></td>
+                        <% if (player.height_in == guesses[i].height_in) { %>
+                            <td class = "green"><%= guesses[i].height %></td>
+                        <% } else if (player.height_in <= guesses[i].height_in + 2 && player.height_in >= guesses[i].height_in - 2) { %>
+                            <td class = "yellow"><%= guesses[i].height %></td>
                         <% } else { %>
-                            <td><%= players[i].height %></td>
+                            <td><%= guesses[i].height %></td>
                         <% } %>
-                        <% if (guess.weight_lbs == players[i].weight_lbs) { %>
-                            <td class = "green"><%= players[i].weight %></td>
-                        <% } else if (guess.weight_lbs <= players[i].weight_lbs + 20 && guess.weight_lbs >= players[i].weight_lbs - 20) { %>
-                            <td class = "yellow"><%= players[i].weight %></td>
+                        <% if (player.weight_lbs == guesses[i].weight_lbs) { %>
+                            <td class = "green"><%= guesses[i].weight %></td>
+                        <% } else if (player.weight_lbs <= guesses[i].weight_lbs + 20 && player.weight_lbs >= guesses[i].weight_lbs - 20) { %>
+                            <td class = "yellow"><%= guesses[i].weight %></td>
                         <% } else { %>
-                            <td><%= players[i].weight %></td>
+                            <td><%= guesses[i].weight %></td>
                         <% } %>                           
-                        <% if (guess.age == players[i].age) { %>
-                            <td class = "green"><%= players[i].age %></td>
-                        <% } else if (guess.age <= players[i].age + 3 && guess.age >= players[i].age - 3) { %>
-                            <td class = "yellow"><%= players[i].age %></td>
+                        <% if (player.age == guesses[i].age) { %>
+                            <td class = "green"><%= guesses[i].age %></td>
+                        <% } else if (player.age <= guesses[i].age + 3 && player.age >= guesses[i].age - 3) { %>
+                            <td class = "yellow"><%= guesses[i].age %></td>
                         <% } else { %>
-                            <td><%= players[i].age %></td>
+                            <td><%= guesses[i].age %></td>
                         <% } %>
-                        <% if (guess.jersey == players[i].jersey) { %>
-                            <td class = "green"><%= players[i].jersey %></td>
-                        <% } else if (guess.jersey <= players[i].jersey + 3 && guess.jersey >= players[i].jersey - 3) { %>
-                            <td class = "yellow"><%= players[i].jersey %></td>
+                        <% if (player.jersey == guesses[i].jersey) { %>
+                            <td class = "green"><%= guesses[i].jersey %></td>
+                        <% } else if (player.jersey <= guesses[i].jersey + 3 && player.jersey >= guesses[i].jersey - 3) { %>
+                            <td class = "yellow"><%= guesses[i].jersey %></td>
                         <% } else { %>
-                            <td><%= players[i].jersey %></td>
+                            <td><%= guesses[i].jersey %></td>
                         <% } %>
                     </tr>
                 <% } %>
@@ -92,22 +92,22 @@
         </table>
     </div>
 
-    <% if (guess.found || players.length == 8) { %>
+    <% if (user.status || guesses.length == 8) { %>
         <div class = "popup" id = "popup">                
-            <% if (guess.image) { %>
-                <img src="<%=guess.image%>" alt="">
+            <% if (player.image) { %>
+                <img src="<%=player.image%>" alt="">
              <% } %>
-            <% if (guess.found) { %>
+            <% if (user.status) { %>
                 <p class = "p">Great Job!</p>
             <% } else { %>
                 <p class = "p">Nice Try!</p>
             <% } %>
-            <h3 class = "h3"><%= guess.name %></h3>
-            <% if (guess.found) { %>
-                <% if (players.length == 1) { %>
+            <h3 class = "h3"><%= player.name %></h3>
+            <% if (user.status) { %>
+                <% if (guesses.length == 1) { %>
                     <p>You solved it in 1 guess</p>
                 <% } else { %>
-                    <p>You solved it in <%= players.length %> guesses</p>
+                    <p>You solved it in <%= guesses.length %> guesses</p>
                 <%  }%> 
             <% } %>
             <button type = "button" onclick = "closePopup()">Close</button>
